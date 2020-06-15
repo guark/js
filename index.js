@@ -19,4 +19,13 @@ const Guark =
 	},
 };
 
+// Overrride window alert
+window.alert = function(message) {
+	console.log("use dialog plugin instead of alert:", message)
+}
+
+window.confirm = function(message) {
+	console.log("use dialog plugin instead of confirm:", message)
+}
+
 module.exports = Guark
