@@ -9,7 +9,7 @@ const Guark =
 	// Call exported Go functions.
 	call(funcName, args)
 	{
-		return window.__guark__call(funcName, args || {})
+		return window["__guark_func_"+ funcName.replace('.', '$')](args || {})
 	},
 
 	// Send desktop notification.
@@ -17,9 +17,17 @@ const Guark =
 	{
 		return this.call("notify.send", Object.assign(args || {}, {message: message}))
 	},
+
+	// exit the app.
+	exit()
+	{
+		return this.call("exit")
+	},
 };
 
-// Overrride window alert
+//
+// Overrride default window funcs.
+//
 window.alert = function(message) {
 	console.log("use dialog plugin instead of alert:", message)
 }
@@ -27,5 +35,7 @@ window.alert = function(message) {
 window.confirm = function(message) {
 	console.log("use dialog plugin instead of confirm:", message)
 }
+
+window.close = Guark.exit
 
 module.exports = Guark
