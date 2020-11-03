@@ -1,5 +1,19 @@
 const Guark =
 {
+	env_data: null,
+
+	env()
+	{
+		if (this.env_data === null) {
+			return this.call("env").then(r => {
+				this.env_data = r
+				return r
+			})
+		}
+
+		return new Promise((res) => res(this.env_data))
+	},
+
 	// Invoke a hook.
 	hook(name)
 	{
@@ -36,6 +50,9 @@ window.confirm = function(message) {
 	console.log("use dialog plugin instead of confirm:", message)
 }
 
-window.close = Guark.exit
+window.close = function() {
+	Guark.exit()
+}
+
 
 module.exports = Guark
