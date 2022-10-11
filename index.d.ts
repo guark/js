@@ -1,22 +1,18 @@
+declare namespace Guark {
 
-export type EnvObject = { [Key: string]: string }
+    type EnvObject = { [Key: string]: string }
 
-export interface Guark {
-  env(): Promise<EnvObject>
-  
-  /** Invoke a hook. */
-  hook(name: string): Promise<any>
-  
-  /** Call exported Go functions. */
-  call(funcName: string, args?: any): Promise<any>
-  
-  /** Send desktop notification. */
-  notify(message: string, args?: any): Promise<any>
-  
-  /** Exit the app. */
-  exit(): Promise<any>
+     const env = ():Promise<EnvObject> => {}
+      /** Call exported Go functions. */
+     const call = (funcName: string, args?: any): Promise<any> => {}
+      /** Send desktop notification. */
+     const notify = (message: string, args?: any): Promise<any> => {}
+      /** Exit the app. */
+     const exit = (): Promise<any> => {}
+      /** Invoke a hook. */
+     const hook = (name: string): Promise<any> => {}
+
 }
 
-declare const Guark: Guark
-export default Guark
+export = Guark
 export as namespace Guark
